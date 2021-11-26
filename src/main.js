@@ -1,7 +1,22 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import store from './store'
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import Vue from 'vue'
+import App from './App'
+import router from './router'
+import ElementUI from 'element-ui';
+//主题
+import './theme/index.css';
 
-const app = createApp(App)
-app.use(store)
-app.mount('#app')
+import Web3 from 'web3'
+
+Vue.config.productionTip = false
+Vue.prototype.Web3 = Web3
+
+Vue.use(ElementUI, { size: 'small', zIndex: 3000 });
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>'
+})
