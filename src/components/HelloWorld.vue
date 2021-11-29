@@ -130,61 +130,65 @@ export default {
             let text = item.innerHTML.replace(/<[^<>]+>/g, "")
             let min = ''
             let max = ''
-            switch (index) {
-              case 1:
-                text = text.match(/\\\$(\\\S*)/)[1]
-                min = options.price[0]
-                max = options.price[1]
-                show = show && changeStyle(text, min, max, node)
-                break;
-              case 2:
-                min = options.txns[0]
-                max = options.txns[1]
-                show = show && changeStyle(text, min, max, node)
-                break;
-              case 3:
-                text = replaceKMB(text.match(/\\\$(\\\S*)/)[1])
-                min = options.volume[0]
-                max = options.volume[1]
-                show = show && changeStyle(text, min, max, node)
-                break;
-              case 4:
-                text = text.substring(0, text.length - 1)
-                min = options.m5[0]
-                max = options.m5[1]
-                show = show && changeStyle(text, min, max, node)
-                break;
-              case 5:
-                text = text.substring(0, text.length - 1)
-                min = options.h1[0]
-                max = options.h1[1]
-                show = show && changeStyle(text, min, max, node)
-                break;
-              case 6:
-                text = text.substring(0, text.length - 1)
-                min = options.h6[0]
-                max = options.h6[1]
-                show = show && changeStyle(text, min, max, node)
-                break;
-              case 7:
-                text = text.substring(0, text.length - 1)
-                min = options.h24[0]
-                max = options.h24[1]
-                show = show && changeStyle(text, min, max, node)
-                break;
-              case 8:
-                text = replaceKMB(text.match(/\\\$(\\\S*)/)[1])
-                min = options.liquidity[0]
-                max = options.liquidity[1]
-                show = show && changeStyle(text, min, max, node)
-                break;
-              case 9:
-                text = replaceKMB(text.match(/\\\$(\\\S*)/)[1])
-                min = options.mktcap[0]
-                max = options.mktcap[1]
-                show = show && changeStyle(text, min, max, node)
-                break;
-            }
+            if(text==="-"){
+
+            }else{
+              switch (index) {
+                case 1:
+                  text = text.match(/\\\$(\\\S*)/)[1]
+                  min = options.price[0]
+                  max = options.price[1]
+                  show = show && changeStyle(text, min, max, node)
+                  break;
+                case 2:
+                  min = options.txns[0]
+                  max = options.txns[1]
+                  show = show && changeStyle(text, min, max, node)
+                  break;
+                case 3:
+                  text = replaceKMB(text.match(/\\\$(\\\S*)/)[1])
+                  min = options.volume[0]
+                  max = options.volume[1]
+                  show = show && changeStyle(text, min, max, node)
+                  break;
+                case 4:
+                  text = text.substring(0, text.length - 1)
+                  min = options.m5[0]
+                  max = options.m5[1]
+                  show = show && changeStyle(text, min, max, node)
+                  break;
+                case 5:
+                  text = text.substring(0, text.length - 1)
+                  min = options.h1[0]
+                  max = options.h1[1]
+                  show = show && changeStyle(text, min, max, node)
+                  break;
+                case 6:
+                  text = text.substring(0, text.length - 1)
+                  min = options.h6[0]
+                  max = options.h6[1]
+                  show = show && changeStyle(text, min, max, node)
+                  break;
+                case 7:
+                  text = text.substring(0, text.length - 1)
+                  min = options.h24[0]
+                  max = options.h24[1]
+                  show = show && changeStyle(text, min, max, node)
+                  break;
+                case 8:
+                  text = replaceKMB(text.match(/\\\$(\\\S*)/)[1])
+                  min = options.liquidity[0]
+                  max = options.liquidity[1]
+                  show = show && changeStyle(text, min, max, node)
+                  break;
+                case 9:
+                  text = replaceKMB(text.match(/\\\$(\\\S*)/)[1])
+                  min = options.mktcap[0]
+                  max = options.mktcap[1]
+                  show = show && changeStyle(text, min, max, node)
+                  break;
+              }
+             }
           })
           if (show) {
             node.removeAttribute('style');
