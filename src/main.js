@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
+import axios from 'axios'
 //主题
 import './theme/index.css';
 //拷贝
@@ -13,13 +14,14 @@ import Web3 from 'web3'
 
 Vue.config.productionTip = false
 Vue.prototype.Web3 = Web3
+Vue.prototype.$axios = axios
 Vue.use(VueClipboard)
 
-Vue.use(ElementUI, { size: 'small', zIndex: 3000 });
+Vue.use(ElementUI, {size: 'small', zIndex: 3000});
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {App},
   template: '<App/>'
 })

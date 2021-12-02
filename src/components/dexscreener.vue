@@ -1,5 +1,6 @@
 <template>
   <div style="height: 100%">
+    <h1>dexscreener数据过滤脚本</h1>
     <h1>{{ msg }}</h1>
     <div style="margin-top: 50px">
       <span style="margin-right: 20px">设置PRICE区间(K):</span>

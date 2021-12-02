@@ -1,15 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import dexscreener from '@/components/dexscreener'
+import utilBox from '@/components/utilBox'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
+      path: '/dexscreener',
+      name: 'dexscreener',
+      component: dexscreener
+    },
+    {
+      path: '/utilBox',
+      name: 'utilBox',
+      component: utilBox
+    },
   ]
 })
