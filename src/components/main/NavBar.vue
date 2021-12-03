@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="user-info">
-      <el-button @click="link_wallet">
+      <el-button @click="link_wallet" v-if="false">
         {{ $store.state.account ? $store.state.account.replace($store.state.account.substr(5, 33), '...') : "链接钱包" }}
       </el-button>
     </div>

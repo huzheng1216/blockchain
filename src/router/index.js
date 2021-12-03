@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import dexscreener from '@/components/dexscreener'
 import utilBox from '@/components/utilBox'
+import wool from '@/components/wool'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/utilBox',
       name: 'utilBox',
       component: utilBox
+    },
+    {
+      path: '/wool',
+      name: 'wool',
+      component: wool
     },
   ]
 })

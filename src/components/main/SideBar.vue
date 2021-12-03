@@ -30,7 +30,10 @@
             <span>工具箱</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="2-1">账户信息查询</el-menu-item>
+            <el-menu-item index="2-1">钱包查询</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group>
+            <el-menu-item index="2-2">羊毛项目</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
@@ -62,6 +65,9 @@
                 break
               case '2-1':
                 _.$router.push({path: '/utilBox'})
+                break
+              case '2-2':
+                _.$router.push({path: '/wool'})
                 break
             }
           }
