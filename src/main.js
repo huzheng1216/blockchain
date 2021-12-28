@@ -10,11 +10,13 @@ import './theme/index.css';
 //拷贝
 import VueClipboard from 'vue-clipboard2'
 
-import Web3 from 'web3'
+import {client} from 'websocket';
+import {ethers} from 'ethers';
 
 Vue.config.productionTip = false
-Vue.prototype.Web3 = Web3
 Vue.prototype.$axios = axios
+Vue.prototype.WebSocketClient = client
+Vue.prototype.Ethers = ethers
 Vue.use(VueClipboard)
 
 Vue.use(ElementUI, {size: 'small', zIndex: 3000});

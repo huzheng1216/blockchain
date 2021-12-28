@@ -1,25 +1,16 @@
 <template>
   <div style="height: 100%">
+    <div v-for="m in msgs">
+      <span>{{ m }}</span>
+    </div>
     <h1>{{ msg }}</h1>
-    <div style="margin-top: 50px">
-      <span style="margin-right: 20px">输入钱包/合约地址:</span>
-      <el-input v-model="options.params[0]" placeholder="请输入内容" style="margin-top: 10px;width: 500px"></el-input>
-    </div>
-    <div style="margin-top: 30px">
-      <span style="margin-right: 20px">选择网络:</span>
-      <el-select v-model="url" placeholder="请选择">
-        <el-option
-          v-for="item in netOptions"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
-        </el-option>
-      </el-select>
-    </div>
     <el-button type="primary" @click="search" style="margin-top: 20px" :loading="loading">查询</el-button>
 
     <div style="margin-top: 20px">
-      <span>余额：{{ balance }} eth</span>
+      <span>ETH余额：{{ balance_eth }} eth</span>
+    </div>
+    <div style="margin-top: 20px">
+      <span>默认代币：{{ defaultCommon }} </span>
     </div>
   </div>
 </template>
@@ -32,49 +23,50 @@ export default {
   name: 'HelloWorld',
   data() {
     return {
+      msgs: [],
       msg: '',
+      loading: false,
       web3: null,
+      myContract: null,
+      balance_eth: 0,
+      defaultCommon: '未知',
     }
   },
 
   mounted() {
     let self = this
-    if (typeof self.web3 !== 'undefined') {
-      self.web3 = new Web3(self.web3.currentProvider);
+    self.msgs.push('启动web3...')
+    if (Web3.givenProvider) {
+      self.msgs.push(`链接以太坊：主节点`);
     } else {
-      self.web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/73ad8b7eac2b4f0797fa79ec0802e6d4"));
+      self.msgs.push(`链接以太坊：infura节点`);
     }
+    self.web3 = new Web3(Web3.givenProvider || "https://mainnet.infura.io/v3/73ad8b7eac2b4f0797fa79ec0802e6d4");
+    self.web3.eth.getBlockNumber()
+      .then(num => self.msgs.push(`区块高度：${num}`))
+      .catch(err => self.msgs.push(`区块高度：获取失败`))
+
     // 定义合约
-    var myContract = new self.web3.eth.Contract(self.$store.state.WOOL.state.abi, self.$store.state.WOOL.state.address, {
-      from: currentAccount, // default from address
-      gasPrice: '10000000000' // default gas price in wei, 10 gwei in this case
-    });
+    self.msgs.push(`连接合约...`);
+    self.myContract = new self.web3.eth.Contract(self.$store.state.WOOL.abi, self.$store.state.WOOL.address);
+    self.msgs.push(`初始化完成：版本[web3 ${Web3.version}] `);
   },
   methods: {
     search() {
-      if (this.options.params[0].length < 1) {
-        this.$message("请输入钱包地址....")
-        return
-      }
-
       let self = this;
       self.loading = true
-      this.$axios.post(self.url, this.options)
-        .then(res => {
-          self.loading = false
-          self.$message({
-            message: '请求成功',
-            type: 'success'
-          });
-          self.balance = Number(res.data.result) / 1e18
-        })
-        .catch(err => {
-          self.loading = false
-          self.$message({
-            message: err,
-            type: 'error'
-          });
-        })
+      //查询eth
+      self.web3.eth.getBalance(self.$store.state.WOOL.address)
+        .then(value => console.log(value))
+        .catch(err => console.log(err))
+      //查询代币
+      self.myContract.methods.name().call({from: self.$store.state.WOOL.address}, (err, result) => {
+        if (err)
+          console.log(err)
+        else
+          console.log(result)
+      })
+      // self.defaultCommon = self.myContract.defaultCommon
     },
   }
 }

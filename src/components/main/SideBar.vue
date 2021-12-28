@@ -35,6 +35,9 @@
           <el-menu-item-group>
             <el-menu-item index="2-2">羊毛项目</el-menu-item>
           </el-menu-item-group>
+          <el-menu-item-group>
+            <el-menu-item index="2-3">套利夹子</el-menu-item>
+          </el-menu-item-group>
         </el-submenu>
       </el-menu>
     </el-col>
@@ -68,6 +71,9 @@
                 break
               case '2-2':
                 _.$router.push({path: '/wool'})
+                break
+              case '2-3':
+                _.$router.push({path: '/infura'})
                 break
             }
           }
